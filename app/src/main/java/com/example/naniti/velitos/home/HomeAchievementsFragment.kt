@@ -13,6 +13,8 @@ import com.example.naniti.velitos.R
 class HomeAchievementsFragment : Fragment() {
 
 
+
+
     companion object {
         fun newInstance() = HomeAchievementsFragment()
     }

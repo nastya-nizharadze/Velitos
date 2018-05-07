@@ -10,10 +10,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 
 import android.view.MenuItem
 import com.example.naniti.velitos.fragments.ui.helper.createFragment
 import com.example.naniti.velitos.fragments.ui.helper.getTag
+import android.view.MenuInflater
+
+
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -25,9 +29,19 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     private lateinit var bottomNavigation: BottomNavigationView
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+
+        return true
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+       // this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+
         restoreSaveInstanceState(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
