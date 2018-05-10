@@ -18,7 +18,6 @@ import com.example.naniti.velitos.fragments.ui.helper.getTag
 import android.view.MenuInflater
 
 
-
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private val KEY_POSITION = "keyPosition"
