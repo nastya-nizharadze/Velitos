@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">#38405E</item>
+        <item name="colorAccent">#545B76</item>
     </style>
 
     <style name="username">
@@ -16,17 +16,17 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#D5E2E1</item>
         <item name="colorPrimaryDark">#38405E</item>
-        <item name="colorAccent">#808FC4</item>
+        <item name="colorAccent">#545B76</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:textColorPrimary">#808FC4</item>
+        <item name="android:textColorPrimary">#545B76</item>
     </style>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#D5E2E1</item>
         <item name="colorPrimaryDark">#38405E</item>
-        <item name="android:textColorPrimary">#808FC4</item>
+        <item name="android:textColorPrimary">#545B76</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
