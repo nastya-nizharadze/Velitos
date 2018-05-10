@@ -7,21 +7,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="username">
+        <item name="android:textSize">18sp</item>
+        <item name="colorPrimary">#D5E2E1</item>
+    </style>
+
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#D5E2E1</item>
+        <item name="colorPrimaryDark">#38405E</item>
+        <item name="colorAccent">#808FC4</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:textColorPrimary">#808FC4</item>
     </style>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="colorPrimary">#D5E2E1</item>
+        <item name="colorPrimaryDark">#38405E</item>
+        <item name="android:textColorPrimary">#808FC4</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".signuplogin.SignUpActivity">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/wallhaven591150"
+        android:orientation="vertical"
+        android:weightSum="1.0"
+        tools:alpha="0.9"
+        tools:layout_constraintVertical_bias="@sample/tools:avatars"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="9"
+        tools:layout_constraintHorizontal_bias="@sample/tools:avatars"
+        android:orientation="horizontal" />
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/signUpEmail"
         android:layout_width="0dp"
