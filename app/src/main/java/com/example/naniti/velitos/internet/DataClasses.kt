@@ -12,7 +12,6 @@ data class UsersSearch(
         @SerializedName("first_name") val firstName: String?,
         @SerializedName("url") val url: String?
 ) {
-
     class Deserializer : ResponseDeserializable<Array<UsersSearch>> {
         override fun deserialize(content: String): Array<UsersSearch> =
                 Gson().fromJson(content, Array<UsersSearch>::class.java)
@@ -26,7 +25,6 @@ data class UsersInstance(
         @SerializedName("url") val url: String?,
         @SerializedName("userprofile") val userprofile: String?
 ) {
-
     class Deserializer : ResponseDeserializable<UsersInstance> {
         override fun deserialize(content: String): UsersInstance =
                 Gson().fromJson(content, UsersInstance::class.java)
@@ -66,16 +64,19 @@ data class User(
 }
 
 
-///////ROOMS SEARCH
-
-
+//api endpoint http://hserver.leningradskaya105.ru:6379/w1.0/rooms_search/
 data class RoomsSearch(
         @SerializedName("name") val name: String?,
         @SerializedName("category") val category: Any?,
         @SerializedName("url") val url: String?
-)
+) {
+    class Deserializer : ResponseDeserializable<Array<RoomsSearch>> {
+        override fun deserialize(content: String): Array<RoomsSearch> =
+                Gson().fromJson(content, Array<RoomsSearch>::class.java)
+    }
+}
 
-
+//api endpoint http://hserver.leningradskaya105.ru:6379/w1.0/rooms/1/
 data class RoomsInstance(
         @SerializedName("name") val name: String?,
         @SerializedName("label") val label: String?,
@@ -84,20 +85,42 @@ data class RoomsInstance(
         @SerializedName("users") val users: List<UserProfileInstance?>?,
         @SerializedName("expiry") val expiry: String?,
         @SerializedName("category") val category: String?
-)
+) {
+    class Deserializer : ResponseDeserializable<RoomsInstance> {
+        override fun deserialize(content: String): RoomsInstance =
+                Gson().fromJson(content, RoomsInstance::class.java)
+    }
 
+    class DeserializerArray : ResponseDeserializable<Array<RoomsInstance>> {
+        override fun deserialize(content: String): Array<RoomsInstance> =
+                Gson().fromJson(content, Array<RoomsInstance>::class.java)
+    }
+}
 
+//api endpoint http://hserver.leningradskaya105.ru:6379/w1.0/category/2/
 data class RoomCategoryInstance(
         @SerializedName("name") val name: String?,
         @SerializedName("rooms") val rooms: List<RoomsInstance?>?,
         @SerializedName("url") val url: String?,
         @SerializedName("description") val description: String?
-)
+) {
+    class DeserializerInstance : ResponseDeserializable<RoomCategoryInstance> {
+        override fun deserialize(content: String): RoomCategoryInstance =
+                Gson().fromJson(content, RoomCategoryInstance::class.java)
+    }
+
+    class DeserializerArray : ResponseDeserializable<Array<RoomCategoryInstance>> {
+        override fun deserialize(content: String): Array<RoomCategoryInstance> =
+                Gson().fromJson(content, Array<RoomCategoryInstance>::class.java)
+    }
+}
 
 
+//api endpoint http://hserver.leningradskaya105.ru:6379/w1.0/challenges_search/
+//and instance
 data class ChallengesSearch(
         @SerializedName("url") val url: String?,
-        @SerializedName("category_challenge") val categoryChallenge: List<Any?>?,
+        @SerializedName("category_challenge") val categoryChallenge: List<Any?>?, //aka list of strings
         @SerializedName("name") val name: String?,
         @SerializedName("pub_date") val pubDate: String?,
         @SerializedName("edit_date") val editDate: String?,
@@ -107,7 +130,17 @@ data class ChallengesSearch(
         @SerializedName("difficulty") val difficulty: Int?,
         @SerializedName("challenge_creator") val challengeCreator: String?,
         @SerializedName("plot_challenge") val plotChallenge: List<Any?>?
-)
+) {
+    class DeserializerInstance : ResponseDeserializable<ChallengesSearch> {
+        override fun deserialize(content: String): ChallengesSearch =
+                Gson().fromJson(content, ChallengesSearch::class.java)
+    }
+
+    class DeserializerArray : ResponseDeserializable<Array<ChallengesSearch>> {
+        override fun deserialize(content: String): Array<ChallengesSearch> =
+                Gson().fromJson(content, Array<ChallengesSearch>::class.java)
+    }
+}
 
 
 data class Token(
