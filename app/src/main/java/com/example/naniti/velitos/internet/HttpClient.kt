@@ -1,12 +1,7 @@
 package com.example.naniti.velitos.internet
 
 
-import android.util.Log
-import com.github.kittinunf.fuel.Fuel;
-import com.github.kittinunf.fuel.android.core.Json
-import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.*
-import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
@@ -28,6 +23,29 @@ class LeningradskayaClient(path: String) : HttpClient {
 
     var clientToken: String? = null
 
+    //authentication path
+    private val registerPath = "/auth/register/"
+    private val tokenGetPath = "/auth/auth-jwt/"
+    private val tokenRefreshPath = "/auth/auth-jwt-refresh/"
+    private val tokenVerifyPath = "/auth/auth-jwt-verify/"
+    private val authBySocialTokenPath = "/auth/auth-by-access-token/"
+    private val authLogoutPath = "/auth/logout/"
+
+    // users path
+    private val usersSearchPath = "${versionApi}/users_search/"
+    private val userInstancePath = "${versionApi}/users/"
+    private val userProfileInstance = "${versionApi}/user_profiles/"
+
+    // rooms path and category
+    private val roomsSearchPath = "${versionApi}/rooms_search/"
+    private val roomInstancePath = "${versionApi}/rooms/"
+    private val roomCategoryInstancePath = "${versionApi}/category/"
+
+    //challange path and category
+
+    private val challengesSearchPath = "${versionApi}/challenges_search/"
+
+
     init {
 
         FuelManager.instance.basePath = path
@@ -39,22 +57,13 @@ class LeningradskayaClient(path: String) : HttpClient {
         is Result.Failure -> null
     }
 
-
-    private fun setAuthToken(request: Request): Request {
+    private fun setAuthHeader(request: Request): Request {
         if (clientToken != null) request.headers += mutableMapOf(Pair(
                 "Authorization",
                 "JWT $clientToken!!"
         ))
         return request
     }
-
-    //authentication path
-    private val registerPath = "/auth/register/"
-    private val tokenGetPath = "/auth/auth-jwt/"
-    private val tokenRefreshPath = "/auth/auth-jwt-refresh/"
-    private val tokenVerifyPath = "/auth/auth-jwt-verify/"
-    private val authBySocialTokenPath = "/auth/auth-by-access-token/"
-    private val authLogoutPath = "/auth/logout/"
 
 
     fun registerClient(username: String, password: String) = bg {
@@ -70,15 +79,14 @@ class LeningradskayaClient(path: String) : HttpClient {
         val data = mutableMapOf<String, String>(
                 Pair("username", username),
                 Pair("password", password))
-        val (req, resp, res) = tokenGetPath.httpPost().body(gson.toJson(data))
+        val (_, _, res) = tokenGetPath.httpPost().body(gson.toJson(data))
                 .responseObject(Token.Deserializer())
         getResult(res)
     }
 
-
     fun refreshClientToken(token: String): Deferred<Token?> = bg {
         val json = gson.toJson(mapOf(Pair("token", token)))
-        val (_, _, res) = tokenRefreshPath.httpPost().responseObject(Token.Deserializer())
+        val (_, _, res) = tokenRefreshPath.httpPost().body(json).responseObject(Token.Deserializer())
         getResult(res)
     }
 
@@ -100,30 +108,62 @@ class LeningradskayaClient(path: String) : HttpClient {
         TODO()
     }
 
-    private val usersSearchPath = "${versionApi}/users_search/"
-    private val userInstancePath = "${versionApi}/users/"
-    private val userProfileInstance = "${versionApi}/user_profiles/"
+    fun getUsersSearch(list: List<Pair<String, String>>? = null) = bg {
 
-    fun usersSearch(list: List<Pair<String, String>>? = null) = bg {
-
-        val (_, _, res) = setAuthToken(usersSearchPath.httpGet(list))
+        val (_, _, res) = setAuthHeader(usersSearchPath.httpGet(list))
                 .responseObject(UsersSearch.Deserializer())
         getResult(res)
     }
 
     fun getUsersInstance(url: String) = bg {
-        val (_, _, res) = setAuthToken(url.httpGet())
+        val (_, _, res) = setAuthHeader(url.httpGet())
                 .responseObject(UsersInstance.Deserializer())
         getResult(res)
     }
 
     fun getUserProfileInstance(url: String) = bg {
-        val (_, _, res) = setAuthToken(url.httpGet())
+        val (_, _, res) = setAuthHeader(url.httpGet())
                 .responseObject(UserProfileInstance.Deserializer())
         getResult(res)
     }
 
 
+    fun getRoomsSearch(list: List<Pair<String, String>>? = null) = bg {
+        val (_, _, res) = setAuthHeader(roomsSearchPath.httpGet(list))
+                .responseObject(RoomsSearch.Deserializer())
+        getResult(res)
+    }
+
+    fun getRoomsInstance(url: String) = bg {
+        val (_, _, res) = setAuthHeader(url.httpGet())
+                .responseObject(RoomsInstance.Deserializer())
+        getResult(res)
+    }
+
+    fun getRoomCategoryInstance(url: String) = bg {
+        val (_, _, res) = setAuthHeader(url.httpGet())
+                .responseObject(RoomCategoryInstance.DeserializerInstance())
+        getResult(res)
+    }
+
+    fun getRoomCategories() = bg {
+        val (_, _, res) = setAuthHeader(roomCategoryInstancePath.httpGet())
+                .responseObject(RoomCategoryInstance.DeserializerArray())
+        getResult(res)
+    }
+
+
+    fun getChallengesSearch(list: List<Pair<String, String>>? = null) = bg {
+        val (_, _, res) = setAuthHeader(challengesSearchPath.httpGet(list))
+                .responseObject(ChallengesSearch.DeserializerArray())
+        getResult(res)
+    }
+
+    fun getChallengeInstance(url: String) = bg {
+        val (_, _, res) = setAuthHeader(url.httpGet())
+                .responseObject(ChallengesSearch.DeserializerInstance())
+        getResult(res)
+    }
 
 
 }
