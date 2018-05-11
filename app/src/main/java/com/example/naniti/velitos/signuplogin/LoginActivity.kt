@@ -12,10 +12,16 @@ import android.support.v7.app.AppCompatActivity
 import com.example.naniti.velitos.MainActivity
 import com.example.naniti.velitos.R
 import com.example.naniti.velitos.baseclasses.BaseActivity
+import com.example.naniti.velitos.internet.LeningradskayaClient
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.channels.NULL_VALUE
 
 
 class LoginActivity : AppCompatActivity() {
     val SIGNUP_CODE = 1
+
+    val httpClient = LeningradskayaClient("http://hserver.leningradskaya105.ru:6379")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +42,22 @@ class LoginActivity : AppCompatActivity() {
     val clickListener = View.OnClickListener { view ->
         when (view.id) {
             R.id.login -> {
-
-                val email = emailTextInputLayout.editText!!.text.toString()
-                val password = passwordTextInputLayout.editText!!.text.toString()
-                Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, password, Toast.LENGTH_LONG).show()
+                async(UI) {
+                    val username = usernameTextInputLayout?.editText!!.text.toString()
+                    val password = passwordTextInputLayout.editText!!.text.toString()
+                    val user_response = httpClient.getClientToken(username, password).await()
+                    if (user_response ==null){
+                        Toast.makeText(this@LoginActivity,"invalid username or password", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        saveToPersistentStorage(user_response.token!!)
+                    }
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                //Toast.makeText(this, username, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, password, Toast.LENGTH_LONG).show()
                 // saveToPersistentStorage("1234556789")
                 // val intent = Intent(this,MainActivity::class.java)
                 //startActivity(intent)

@@ -54,7 +54,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Make your life better"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/usernameTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Velitos"
@@ -75,7 +75,7 @@
         android:text="Velitos"
         android:textSize="36sp"
         app:fontFamily="@font/yellowtail_regular"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/usernameTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +172,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/emailTextInputLayout"
+        android:id="@+id/usernameTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -194,8 +194,8 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="email"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/username"
+            android:inputType="textPersonName" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
