@@ -37,8 +37,8 @@ class RoomsFragment : Fragment() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = TabViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(RoomsAvailableRooms.newInstance(), "My rooms")
-        adapter.addFragment(RoomsMyRooms.newInstance(), "Available")
+        adapter.addFragment(RoomsMyRooms.newInstance(), "My rooms")
+        adapter.addFragment(RoomsAvailableRooms.newInstance(), "Available")
         viewPager.adapter = adapter
     }
 

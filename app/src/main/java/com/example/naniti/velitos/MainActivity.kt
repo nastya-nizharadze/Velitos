@@ -1,5 +1,7 @@
 package com.example.naniti.velitos
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.Toolbar
@@ -16,9 +18,13 @@ import android.view.MenuItem
 import com.example.naniti.velitos.fragments.ui.helper.createFragment
 import com.example.naniti.velitos.fragments.ui.helper.getTag
 import android.view.MenuInflater
+import com.example.naniti.velitos.internet.LeningradskayaClient
+import com.example.naniti.velitos.signuplogin.LoginActivity
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    val httpClient = LeningradskayaClient("http://hserver.leningradskaya105.ru:6379")
 
     private val KEY_POSITION = "keyPosition"
 
@@ -38,11 +44,21 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-       // this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        // this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
 
         restoreSaveInstanceState(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
+
+        if (pref.getString("JWTTOKEN", "") != "") {
+            httpClient.clientToken = pref.getString("JWTTOKEN", "")
+        } else {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         toolbar = findViewById(R.id.toolbar)
         bottomNavigation = findViewById(R.id.bottom_navigation)
         setSupportActionBar(toolbar)

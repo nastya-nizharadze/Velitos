@@ -25,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signuplogin.SignUpActivity"></activity>
+        <activity android:name=".signuplogin.SignUpActivity" />
+        <activity android:name=".challenges.ChallengeDetailActivity" />
+        <activity android:name=".rooms.RoomDetailActivity"></activity>
     </application>
 
 </manifest>
