@@ -33,6 +33,7 @@ class ChallengeAdapter(val items: ArrayList<ChallengesSearch>,
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(challenge: ChallengesSearch, clickListener: (ChallengesSearch) -> Unit) {
         itemView.tv_challengeName_type.text = challenge.name!!
+        itemView.tv_challengeName_description.text = challenge.description!!
         itemView.setOnClickListener { clickListener(challenge) }
     }
 
