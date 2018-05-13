@@ -9,12 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.naniti.velitos.MainActivity
-
 import com.example.naniti.velitos.R
 import com.example.naniti.velitos.challenges.ChallengeAdapter
-import com.example.naniti.velitos.internet.ChallengesSearch
+import com.example.naniti.velitos.internet.UsersSearch
 
-//import com.example.naniti.velitos.internet.ProfileSearch
 import com.example.naniti.velitos.internet.LeningradskayaClient
 import kotlinx.android.synthetic.main.fragment_home_profile.*
 import kotlinx.coroutines.experimental.android.UI
@@ -24,7 +22,6 @@ import kotlinx.coroutines.experimental.async
 class HomeProfileFragment : Fragment() {
 
     lateinit var httpClient: LeningradskayaClient
-   // var profilesDetail: ArrayList<ProfileSearch> = ArrayList()
 
     companion object {
         fun newInstance() = HomeProfileFragment()
@@ -38,13 +35,11 @@ class HomeProfileFragment : Fragment() {
 
         async(UI) {
             val activity = getActivity()
-            //challengesDetail = httpClient.getProfileSearch().await()!!.toCollection(ArrayList())
-            //rv_profile_list.layoutManager = LinearLayoutManager(activity)
-            //rv_profile_list.adapter = ChallengeAdapter(
-            //        profileDetail, activity,
-            //        { user: ProfileSearch -> partItemClicked(user) })
-            //person_name.text = user.name!!
+            //Никитв вставь
             person_name.text = "Vasya Pupkin"
+            tv_item1.text = "Санкт-Петербург"
+            tv_item.text = "21 марта 1998"
+
         }
         return profile
     }

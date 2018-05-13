@@ -1,9 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".challenges.ChallengeDetailActivity">
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    tools:context=".challenges.ChallengeDetailActivity"
+    android:background="#AFCCFF"
+    >
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginStart="1dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#AFCCFF">
+
+                    <TextView
+                        android:id="@+id/tv_item1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:text="Название"
+                        android:textColor="#38405E"
+                        android:textSize="12sp"
+                        android:background="#90D5E2E1"/>
+
+                    <TextView
+                        android:id="@+id/challenge_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp"
+                        android:background="#90D5E2E1"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!--android.support.v7.widget.CardView
+                android:id="@+id/card_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#AFCCFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#90D5E2E1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Создатель челленджа"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_creator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#AFCCFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Стоимость"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_cost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#AFCCFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Описание"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#AFCCFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Сложность"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_difficulty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!--android.support.v7.widget.CardView
+                android:id="@+id/card_view6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#AFCCFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#90D5E2E1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Дата последнего изменения"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_editDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#AFCCFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Популярность"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_popularity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!--android.support.v7.widget.CardView
+                android:id="@+id/card_view8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#AFCCFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#90D5E2E1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_item8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:text="Дата публикации челленджа"
+                        android:textColor="#38405E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/challenge_pubDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="#90D5E2E1"
+                        android:padding="5dp"
+                        android:textColor="#38405E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView-->
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="217dp"
+                android:layout_height="51dp"
+
+                android:layout_gravity="center"
+                android:background="#D5E2E1"
+                android:shadowDx="0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="0.5"
+                android:text="Добавить челлендж" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>
