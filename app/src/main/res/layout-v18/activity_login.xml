@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -13,19 +14,29 @@
         android:orientation="vertical"
         android:weightSum="1.0"
         tools:alpha="0.9"
+        tools:ignore="MissingConstraints"
         tools:layout_constraintVertical_bias="@sample/tools:avatars"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="29dp" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:weightSum="9"
-        tools:layout_constraintHorizontal_bias="@sample/tools:avatars"
-        android:orientation="horizontal" />
+    <TextView
+        android:id="@+id/life_better"
+        android:layout_width="133dp"
+        android:layout_height="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="Make your life better"
+        app:layout_constraintBottom_toTopOf="@+id/usernameTextInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Velitos"
+        app:layout_constraintVertical_bias="0.181"
+        tools:text="Make your life better" />
 
     <Button
         android:id="@+id/login"
@@ -36,12 +47,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="116dp"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout" />
 
 
     <TextView
@@ -62,6 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.333"
         tools:imeActionId="@android:integer/config_longAnimTime"
         tools:text="Velitos"
         tools:textColor="#234144" />
@@ -144,20 +157,17 @@
         android:id="@+id/usernameTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordTextInputLayout"
+        android:layout_marginTop="156dp"
+        android:background="#90D5E2E1"
+        android:theme="@style/AppTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.754"
-        tools:alpha="0.7"
-        tools:background="#D5E2E1">
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
@@ -170,32 +180,28 @@
         android:id="@+id/passwordTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:alpha="0.7"
-        tools:background="#D5E2E1">
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
+        app:layout_constraintVertical_bias="0.739"
+        android:background="#90D5E2E1">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/passwordField"
             android:layout_width="495dp"
             android:layout_height="wrap_content"
             android:hint="password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:theme="@style/AppTheme" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
 
 
 </android.support.constraint.ConstraintLayout>

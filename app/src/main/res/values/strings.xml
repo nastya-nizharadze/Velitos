@@ -15,4 +15,5 @@
     <string name="username">username</string>
     <string name="login">Login</string>
     <string name="log">or login with social network</string>
+    <string name="user_photo">Image</string>
 </resources>

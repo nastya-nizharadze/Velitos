@@ -33,7 +33,8 @@ class RoomAdapter(val items: ArrayList<RoomsSearch>,
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(challenge: RoomsSearch, clickListener: (RoomsSearch) -> Unit) {
         itemView.tv_roomName_type.text = challenge.name!!
-        itemView.setOnClickListener { clickListener(challenge) }
+        itemView.setOnClickListener { clickListener(challenge)
+        }
     }
 
 //    val tvChallengeNameType = view.tv_challengeName_type
