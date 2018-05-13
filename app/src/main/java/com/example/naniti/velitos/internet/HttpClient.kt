@@ -1,6 +1,8 @@
 package com.example.naniti.velitos.internet
 
 
+import android.util.Log
+import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
@@ -35,6 +37,7 @@ class LeningradskayaClient(path: String) : HttpClient {
     private val usersSearchPath = "${versionApi}/users_search/"
     private val userInstancePath = "${versionApi}/users/"
     private val userProfileInstance = "${versionApi}/user_profiles/"
+    private val getProfileInstancePath = "${versionApi}/get_profile/"
 
     // rooms path and category
     private val roomsSearchPath = "${versionApi}/rooms_search/"
@@ -164,6 +167,16 @@ class LeningradskayaClient(path: String) : HttpClient {
                 .responseObject(ChallengesSearch.DeserializerInstance())
         getResult(res)
     }
+
+    fun getProfileInstance(username: String) = bg {
+        val path = setAuthHeader(("$getProfileInstancePath$username").httpGet())
+                .responseJson().second.url.path!!
+        val (_, _, res) = setAuthHeader(path.httpGet())
+                    .responseObject(UserProfileInstance.Deserializer())
+        getResult(res)
+    }
+
+
 
 
 }
