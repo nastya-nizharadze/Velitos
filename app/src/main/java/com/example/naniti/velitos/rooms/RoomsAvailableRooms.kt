@@ -53,6 +53,7 @@ class RoomsAvailableRooms : Fragment() {
         //bad code below
 
         showDetailActivityIntent.putExtra("name", roomsSearch.name.toString())
+        showDetailActivityIntent.putExtra("category", roomsSearch.category.toString())
         showDetailActivityIntent.putExtra("url", roomsSearch.url.toString())
         startActivity(showDetailActivityIntent)
 
