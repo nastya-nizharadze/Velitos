@@ -38,7 +38,35 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
 
-        return true
+        val searchItem = menu.findItem(R.id.search)
+        // Detect SearchView icon clicks
+        // Detect SearchView close
+        searchItem.setOnActionExpandListener(
+                object : MenuItem.OnActionExpandListener {
+                    override fun onMenuItemActionExpand(search: MenuItem?): Boolean {
+                        setItemsVisibility(menu, search!!, false)
+                        return true
+                    }
+
+                    override fun onMenuItemActionCollapse(search: MenuItem?): Boolean {
+                        setItemsVisibility(menu, search!!, true)
+                        return true
+                    }
+                }
+        )
+
+
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+
+    private fun setItemsVisibility(menu: Menu, exception: MenuItem, visible: Boolean) {
+        for (i in 0 until menu.size()) {
+            val item = menu.getItem(i)
+            if (item != exception) item.isVisible = visible
+
+        }
     }
 
 
