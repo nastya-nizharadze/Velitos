@@ -47,7 +47,7 @@ class SignUpActivity : AppCompatActivity(){
                             if (user_response == null) {
                                 Toast.makeText(this@SignUpActivity, "invalid username or password", Toast.LENGTH_SHORT).show()
                             } else {
-                                saveToPersistentStorage(user_response.token!!)
+                                saveToPersistentStorage(user_response.token!!, username.toString())
                                 Toast.makeText(this@SignUpActivity, "to main", Toast.LENGTH_SHORT).show()
                                 setResult(SIGNUP_CODE)
                                 finish()
@@ -72,13 +72,15 @@ class SignUpActivity : AppCompatActivity(){
         return true
     }
 
-    private fun saveToPersistentStorage(token: String) {
+    private fun saveToPersistentStorage(token: String, username: String) {
 
         Toast.makeText(baseContext, "SAVE!", Toast.LENGTH_SHORT).show()
 
         val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
         val edt = pref.edit()
         edt.putString("JWTTOKEN", token)
+        edt.putString("USERNAME",username)
         edt.apply()
     }
+
 }

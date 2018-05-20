@@ -45,13 +45,14 @@ class LoginActivity : AppCompatActivity() {
                 async(UI) {
                     val username = usernameTextInputLayout?.editText!!.text.toString()
                     val password = passwordTextInputLayout.editText!!.text.toString()
-                    val user_response = httpClient.getClientToken(username, password).await()
-                    if (user_response ==null){
+                    val userResponse = httpClient.getClientToken(username, password).await()
+                    if (userResponse ==null){
                         Toast.makeText(this@LoginActivity,"invalid username or password", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        saveToPersistentStorage(user_response.token!!)
+                        saveToPersistentStorage(userResponse.token!!, username)
                     }
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -89,13 +90,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveToPersistentStorage(token: String) {
+    private fun saveToPersistentStorage(token: String, username: String) {
 
         Toast.makeText(baseContext, "SAVE!", Toast.LENGTH_SHORT).show()
 
         val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
         val edt = pref.edit()
         edt.putString("JWTTOKEN", token)
+        edt.putString("USERNAME",username)
         edt.apply()
     }
 
