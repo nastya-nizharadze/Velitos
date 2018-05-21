@@ -1,4 +1,4 @@
-package com.example.naniti.velitos.rooms
+package com.example.naniti.velitos.rooms.availableRooms
 
 
 import android.content.Context
@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.naniti.velitos.R
 import com.example.naniti.velitos.internet.RoomsSearch
-import kotlinx.android.synthetic.main.challenge_list_item.view.*
 import kotlinx.android.synthetic.main.room_list_item.view.*
 
 
 class RoomAdapter(val items: ArrayList<RoomsSearch>,
-                       val context: Context, val clickListener: (RoomsSearch) -> Unit)
+                  val context: Context, val clickListener: (RoomsSearch) -> Unit)
     : RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
@@ -33,7 +32,8 @@ class RoomAdapter(val items: ArrayList<RoomsSearch>,
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(challenge: RoomsSearch, clickListener: (RoomsSearch) -> Unit) {
         itemView.tv_roomName_type.text = challenge.name!!
-        itemView.setOnClickListener { clickListener(challenge)
+        itemView.setOnClickListener {
+            clickListener(challenge)
         }
     }
 

@@ -14,19 +14,22 @@ import org.greenrobot.eventbus.EventBus
 class LeningradskayaSocketConnection(private var context: Context) : ClientWebSocket.MessageListener {
 
     companion object {
-       // val SERVER = "ws://echo.websocket.org"
-       // val SERVER = "ws://hserver.leningradskaya105.ru:6379/ws/chat/edf/?token=3df"
-   val SERVER = "ws://hserver.leningradskaya105.ru:6379/ws/chat/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hcyIsImV4cCI6MTUzMjI0NTI4MCwiZW1haWwiOiJuYXNAYmsucnUifQ.AaXbHCSYDFpY06-Hf8CQ8liTXgTRyJccXUVMSzgV1mQ"
+        // val SERVER = "ws://echo.websocket.org"
+        // val SERVER = "ws://hserver.leningradskaya105.ru:6379/ws/chat/edf/?token=3df"
+        val SERVER = "ws://hserver.leningradskaya105.ru:6379/ws/chat/?token="
     }
+
     var clientWebSocket: ClientWebSocket? = null
     var gson = Gson()
 
 
-    fun openConnection() {
+    fun openConnection(token: String) {
 
+        Log.i("onOPen", token)
         if (clientWebSocket != null) clientWebSocket!!.close()
         try {
-            clientWebSocket = ClientWebSocket(this, SERVER)
+            Log.i("onOPen", token)
+            clientWebSocket = ClientWebSocket(this, "$SERVER$token")
 
             clientWebSocket!!.connect()
             Log.i("Websocket", "Socket connected by user ")

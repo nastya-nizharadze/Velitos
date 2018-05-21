@@ -10,6 +10,8 @@ import android.view.ViewGroup
 
 import com.example.naniti.velitos.R
 import com.example.naniti.velitos.baseclasses.TabViewPagerAdapter
+import com.example.naniti.velitos.rooms.availableRooms.RoomsAvailableRooms
+import com.example.naniti.velitos.rooms.myRooms.RoomsMyRooms
 
 
 class RoomsFragment : Fragment() {

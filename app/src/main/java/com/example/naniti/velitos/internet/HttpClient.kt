@@ -2,6 +2,7 @@ package com.example.naniti.velitos.internet
 
 
 import android.util.Log
+import com.example.naniti.velitos.rooms.myRooms.Room
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.*
 import com.github.kittinunf.fuel.httpGet
@@ -43,6 +44,7 @@ class LeningradskayaClient(path: String) : HttpClient {
     private val roomsSearchPath = "${versionApi}/rooms_search/"
     private val roomInstancePath = "${versionApi}/rooms/"
     private val roomCategoryInstancePath = "${versionApi}/category/"
+    private val myRoomsPath = "${versionApi}/get_user_rooms/"
 
     //challange path and category
 
@@ -172,11 +174,15 @@ class LeningradskayaClient(path: String) : HttpClient {
         val path = setAuthHeader(("$getProfileInstancePath$username").httpGet())
                 .responseJson().second.url.path!!
         val (_, _, res) = setAuthHeader(path.httpGet())
-                    .responseObject(UserProfileInstance.Deserializer())
+                .responseObject(UserProfileInstance.Deserializer())
         getResult(res)
     }
 
 
+    fun getUserRooms() = bg {
+        val (_, _, res) = setAuthHeader(myRoomsPath.httpGet()).responseObject(Rooms.Deserializer())
+        getResult(res)
+    }
 
 
 }

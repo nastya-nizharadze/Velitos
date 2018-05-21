@@ -2,6 +2,7 @@ package com.example.naniti.velitos.internet.websocket
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 
 
 import com.example.naniti.velitos.internet.websocket.LeningradskayaSocketConnection
@@ -11,11 +12,10 @@ class LeningradskayaWebSocketApp() : Application() {
 
     private lateinit var leningradskayaSocketConnection: LeningradskayaSocketConnection
 
-   lateinit var  check:String
+    lateinit var check: String
     override fun onCreate() {
         super.onCreate()
         check = "CHECKED"
-        leningradskayaSocketConnection = LeningradskayaSocketConnection(this)
     }
 
     fun closeSocketConnection() {
@@ -23,7 +23,10 @@ class LeningradskayaWebSocketApp() : Application() {
     }
 
     fun openSocketConnection() {
-        leningradskayaSocketConnection.openConnection()
+        Log.i("OPENSOCKET","open")
+        val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
+        leningradskayaSocketConnection = LeningradskayaSocketConnection(this)
+        leningradskayaSocketConnection.openConnection(pref.getString("JWTTOKEN", ""))
     }
 
     fun isSocketConnected(): Boolean {
@@ -31,7 +34,9 @@ class LeningradskayaWebSocketApp() : Application() {
     }
 
     fun reconnect() {
-        leningradskayaSocketConnection.openConnection()
+        val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
+        leningradskayaSocketConnection.openConnection(pref.getString("JWTTOKEN", ""))
+
     }
 
     fun sendMessage(message: String?) {
@@ -46,7 +51,7 @@ class LeningradskayaWebSocketApp() : Application() {
     companion object {
         private var instance: LeningradskayaWebSocketApp? = null
 
-        fun applicationContext() : Context {
+        fun applicationContext(): Context {
             return instance!!.applicationContext
         }
     }

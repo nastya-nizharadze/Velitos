@@ -4,6 +4,7 @@ package com.example.naniti.velitos.challenges
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +20,16 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 
 
-class ChallengesPopularFragment : Fragment() {
+class ChallengesPopularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+    override fun onRefresh() {
+        async(UI) {
+            loadData()
+        }
+    }
+
     lateinit var httpClient: LeningradskayaClient
     var challengesDetail: ArrayList<ChallengesSearch> = ArrayList()
-
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     companion object {
         fun newInstance() = ChallengesPopularFragment()
@@ -33,13 +40,17 @@ class ChallengesPopularFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_challenges_popular, container, false)
         httpClient = (activity as MainActivity).httpClient
 
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout = view.findViewById(R.id.challenges_popular_swipe_container)
+        mSwipeRefreshLayout.setOnRefreshListener(this)
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark)
+
+
         async(UI) {
-            val activity = getActivity()
-            challengesDetail = httpClient.getChallengesSearch().await()!!.toCollection(ArrayList())
-            rv_challenge_list.layoutManager = LinearLayoutManager(activity)
-            rv_challenge_list.adapter = ChallengeAdapter(
-                    challengesDetail, activity,
-                    { challenge: ChallengesSearch -> partItemClicked(challenge) })
+            loadData()
         }
 
         return view
@@ -65,5 +76,14 @@ class ChallengesPopularFragment : Fragment() {
 
     }
 
+    private suspend fun loadData() {
+        mSwipeRefreshLayout.isRefreshing = true
+        challengesDetail = httpClient.getChallengesSearch().await()!!.toCollection(ArrayList())
+        rv_challenge_list.layoutManager = LinearLayoutManager(activity)
+        rv_challenge_list.adapter = ChallengeAdapter(
+                challengesDetail, activity,
+                { challenge: ChallengesSearch -> partItemClicked(challenge) })
+        mSwipeRefreshLayout.isRefreshing = false
+    }
 
 }

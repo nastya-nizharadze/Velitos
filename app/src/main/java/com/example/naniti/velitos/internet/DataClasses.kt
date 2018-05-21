@@ -151,3 +151,49 @@ data class Token(
         override fun deserialize(content: String): Token? = Gson().fromJson(content, Token::class.java)
     }
 }
+
+
+data class MessageSend(
+        @SerializedName("command") val command: String?,
+        @SerializedName("message") val message: String?,
+        @SerializedName("room_label") val roomLabel: String?
+) {
+    class Deserializer : ResponseDeserializable<MessageSend> {
+        override fun deserialize(content: String): MessageSend? = Gson().fromJson(content, MessageSend::class.java)
+    }
+
+}
+
+
+//for my rooms
+
+data class UserProfile(
+        @SerializedName("url") val url: String?,
+        @SerializedName("image") val image: Any?,
+        @SerializedName("user") val user: User?
+) {
+    class Deserializer : ResponseDeserializable<UserProfile> {
+        override fun deserialize(content: String): UserProfile? = Gson().fromJson(content, UserProfile::class.java)
+    }
+
+    class DeserializerArray : ResponseDeserializable<Array<UserProfile>> {
+        override fun deserialize(content: String): Array<UserProfile> = Gson().fromJson(content, Array<UserProfile>::class.java)
+    }
+}
+
+
+data class Rooms(
+        @SerializedName("name") val name: String?,
+        @SerializedName("label") val label: String?,
+        @SerializedName("url") val url: String?,
+        @SerializedName("size") val size: Int?,
+        @SerializedName("users") val users: List<UserProfile?>?,
+        @SerializedName("expiry") val expiry: String?,
+        @SerializedName("category") val category: String?,
+        @SerializedName("messages") val messages: List<String?>?
+) {
+    class Deserializer : ResponseDeserializable<Array<Rooms>> {
+        override fun deserialize(content: String): Array<Rooms>? = Gson().fromJson(content, Array<Rooms>::class.java)
+    }
+}
+

@@ -25,7 +25,7 @@ import com.example.naniti.velitos.signuplogin.LoginActivity
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     val httpClient = LeningradskayaClient("http://hserver.leningradskaya105.ru:6379")
-
+    lateinit var username:String
     private val KEY_POSITION = "keyPosition"
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main)
 
         val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
-
+        username = pref.getString("USERNAME","")
         if (pref.getString("JWTTOKEN", "") != "") {
             httpClient.clientToken = pref.getString("JWTTOKEN", "")
         } else {

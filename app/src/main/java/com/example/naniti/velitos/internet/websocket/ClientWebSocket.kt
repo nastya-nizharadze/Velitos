@@ -27,6 +27,7 @@ class ClientWebSocket(private val listener: MessageListener, private val host: S
             reconnect()
         } else {
             try {
+                Log.i("STATUDHOST",host)
                 val factory = WebSocketFactory().setConnectionTimeout(5000)
                 connection = factory.createSocket(  host)
                 connection!!.addListener(SocketListener())
@@ -65,6 +66,7 @@ class ClientWebSocket(private val listener: MessageListener, private val host: S
 
         @Throws(Exception::class)
         override fun onConnected(websocket: WebSocket?, headers: Map<String, List<String>>?) {
+            Log.d(TAG, "onConnected")
             super.onConnected(websocket, headers)
             Log.d(TAG, "onConnected")
         }

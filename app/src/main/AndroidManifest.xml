@@ -28,8 +28,8 @@
         </activity>
         <activity android:name=".signuplogin.SignUpActivity" />
         <activity android:name=".challenges.ChallengeDetailActivity" />
-        <activity android:name=".rooms.RoomDetailActivity" />
-        <activity android:name=".rooms.room.ChatActivity"></activity>
+        <activity android:name=".rooms.detailRoom.RoomDetailActivity" />
+        <activity android:name=".rooms.chat.ChatActivity"></activity>
     </application>
 
 </manifest>
