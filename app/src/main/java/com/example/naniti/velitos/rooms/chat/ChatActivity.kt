@@ -62,10 +62,6 @@ class ChatActivity : AppCompatActivity() {
         //DELEET AFTER MAKE
         launch(UI) {
             bg {
-                socket.openSocketConnection()
-
-            }.await()
-            bg {
                 val message = MessageSend(RECONNECT_CLIENT, "bla", roomLabel)
                 val json = gson.toJson(message)
                 socket.sendMessage(json)

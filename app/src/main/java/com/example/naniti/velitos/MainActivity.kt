@@ -19,14 +19,20 @@ import com.example.naniti.velitos.fragments.ui.helper.createFragment
 import com.example.naniti.velitos.fragments.ui.helper.getTag
 import android.view.MenuInflater
 import com.example.naniti.velitos.internet.LeningradskayaClient
+import com.example.naniti.velitos.internet.websocket.LeningradskayaWebSocketApp
 import com.example.naniti.velitos.signuplogin.LoginActivity
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
+import org.jetbrains.anko.coroutines.experimental.bg
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     val httpClient = LeningradskayaClient("http://hserver.leningradskaya105.ru:6379")
-    lateinit var username:String
+    lateinit var username: String
     private val KEY_POSITION = "keyPosition"
+    lateinit var socket: LeningradskayaWebSocketApp
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 
@@ -74,12 +80,19 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         // this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+        socket = LeningradskayaWebSocketApp.applicationContext() as LeningradskayaWebSocketApp
 
         restoreSaveInstanceState(savedInstanceState)
         setContentView(R.layout.activity_main)
+        launch(UI) {
+            bg {
+                socket.openSocketConnection()
+
+            }.await()
+        }
 
         val pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
-        username = pref.getString("USERNAME","")
+        username = pref.getString("USERNAME", "")
         if (pref.getString("JWTTOKEN", "") != "") {
             httpClient.clientToken = pref.getString("JWTTOKEN", "")
         } else {
