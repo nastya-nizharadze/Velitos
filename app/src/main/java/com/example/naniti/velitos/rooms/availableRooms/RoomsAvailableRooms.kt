@@ -72,6 +72,7 @@ class RoomsAvailableRooms : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         Toast.makeText(activity, "Clicked: ${roomsSearch.name}", Toast.LENGTH_LONG).show()
         val showDetailActivityIntent = Intent(activity, RoomDetailActivity::class.java)
         showDetailActivityIntent.putExtra("name", roomsSearch.name.toString())
+        showDetailActivityIntent.putExtra("category", roomsSearch.category.toString())
         showDetailActivityIntent.putExtra("url", roomsSearch.url.toString())
         startActivity(showDetailActivityIntent)
 
