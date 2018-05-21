@@ -75,8 +75,9 @@ class HomeProfileFragment : Fragment() {
 
                 val personImage = request.image.toString()
                 if (personImage != "") {
-                    val imageView = view?.findViewById(R.id.imageView) as ImageView
-                    imageView.setImageDrawable(null)
+                    val iv = view?.findViewById(R.id.imageView) as ImageView
+                    iv.setImageDrawable(null)
+                    iv.scaleType = ImageView.ScaleType.CENTER_CROP
                     Picasso.get().load(personImage).into(imageView)
                 } else {
                     imageView.setImageResource(noavatar_profile)
