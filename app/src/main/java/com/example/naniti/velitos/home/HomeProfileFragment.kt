@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.example.naniti.velitos.MainActivity
 import com.example.naniti.velitos.R
 import com.example.naniti.velitos.R.drawable.noavatar_profile
@@ -16,6 +17,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home_profile.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import com.example.naniti.velitos.R.id.view
+
+
 
 
 class HomeProfileFragment : Fragment() {
@@ -35,39 +39,44 @@ class HomeProfileFragment : Fragment() {
         val pref = activity.getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE)
 
             async(UI) {
-
-                val personBirthDay = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.birthDate
+                val request = httpClient.getProfileInstance(pref.getString("USERNAME", "")).await()!!
+                val personBirthDay = request.birthDate
                 if (personBirthDay != null) {
                     tv_item.text = personBirthDay.toString()
                 } else {
                     tv_item.text = "Дата рождения не указана"
                 }
-                val personGender = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.gender
+                val personGender = request.gender
                 if (personGender != null) {
-                    tv_item1.text = personGender
+                    when (personGender){
+                        "F" -> tv_item1.text = "Женский"
+                        "M" -> tv_item1.text = "Мужской"
+                    }
                 } else {
                     tv_item1.text = "Пол не указан"
                 }
-                val personBiography = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.bio
+                val personBiography = request.bio
                 if (personBiography != null) {
                     tv_item5.text = personBiography
                 } else {
                     tv_item5.text = "Биография не указана"
                 }
 
-                val personPopularity = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.popularity
-                tv_item8.text = personPopularity.toString()
+                val personPopularity = request.popularity
+                tv_item8.text = ("$personPopularity из 100")
 
-                val personFirstName = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.user!!.firstName
-                val personLastName = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.user!!.lastName
+                val personFirstName = request.user!!.firstName
+                val personLastName = request.user!!.lastName
                 if (personFirstName != "" && personLastName != "") {
                     person_name.text = "$personFirstName $personLastName"
                 } else {
                     person_name.text = "Имя и фамилия не указаны"
                 }
 
-                val personImage = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.image.toString()
+                val personImage = request.image.toString()
                 if (personImage != "") {
+                    val imageView = view?.findViewById(R.id.imageView) as ImageView
+                    imageView.setImageDrawable(null)
                     Picasso.get().load(personImage).into(imageView)
                 } else {
                     imageView.setImageResource(noavatar_profile)
