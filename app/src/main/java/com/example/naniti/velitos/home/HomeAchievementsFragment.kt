@@ -36,8 +36,8 @@ class HomeAchievementsFragment : Fragment() {
 
         async(UI) {
 
-            val personRating = httpClient.getUserProfileInstance(pref.getString("USERNAME", "")).await()!!.globalRating
-            tv_item.text = personRating.toString()
+            val personRating = httpClient.getProfileInstance(pref.getString("USERNAME", "")).await()!!.globalRating
+            tv_item.text = ("$personRating points")
         }
 
         return achiv
