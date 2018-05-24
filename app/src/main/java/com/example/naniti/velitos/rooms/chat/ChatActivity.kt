@@ -29,13 +29,11 @@ import kotlinx.android.synthetic.main.activity_chat.*
 
 
 class ChatActivity : AppCompatActivity() {
-
     lateinit var username: String
     val gson: Gson = Gson()
     private lateinit var adapter: MessageAdapter
     lateinit var socket: LeningradskayaWebSocketApp
     lateinit var roomLabel: String
-
 
     override fun onStart() {
         super.onStart()
@@ -59,7 +57,7 @@ class ChatActivity : AppCompatActivity() {
         messageList.layoutManager = LinearLayoutManager(this)
         adapter = MessageAdapter(this)
         messageList.adapter = adapter
-        //DELEET AFTER MAKE
+
         launch(UI) {
             bg {
                 val message = MessageSend(RECONNECT_CLIENT, "bla", roomLabel)
@@ -106,8 +104,6 @@ class ChatActivity : AppCompatActivity() {
             val userMessage = txtMessage.text.toString()
             val json = gson.toJson(MessageSend(SEND, userMessage, roomLabel))
             async(UI) {
-                val message = Message(username, userMessage, "time")
-                adapter.addMessage(message)
                 messageList.scrollToPosition(adapter.itemCount - 1)
                 socket.sendMessage(json)
             }
